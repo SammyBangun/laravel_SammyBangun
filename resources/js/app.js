@@ -4,10 +4,28 @@ import $ from "jquery";
 window.$ = window.JQuery = $;
 
 $(document).ready(function () {
-    $("#btnKlik").click(function () {
-        alert("jQuery bekerja di Laravel 12 ✅");
+    $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": document
+                .querySelector('meta[name="csrf-token"]')
+                .getAttribute("content"),
+        },
     });
-    $("#btnSeret").mouseenter(function () {
-        alert("jQuery bekerja di Laravel 12 ✅");
+    $(".delete-btn").click(function () {
+        if (confirm("Apakah anda yakin ingin menghapus?")) {
+            let id = $(this).data("id");
+            $.ajax({
+                url: "/hospitals/" + id,
+                type: "DELETE",
+                success: function (response) {
+                    if (response.success) {
+                        $("#row-" + id).remove();
+                    }
+                },
+                error: function (xhr) {
+                    alert("Gagal menghapus! Error: " + xhr.status);
+                },
+            });
+        }
     });
 });

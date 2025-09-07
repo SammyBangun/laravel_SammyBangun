@@ -15,7 +15,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware('auth.custom');
+})->middleware('auth.custom')->name('dashboard');
 
 Route::middleware('auth.custom')->group(function () {
     Route::resource('hospitals', HospitalController::class);

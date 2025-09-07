@@ -3,23 +3,34 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laravel + jQuery + Bootstrap</title>
+    <title>Dashboard</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
-<body class="container py-5">
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <a class="navbar-brand" href="{{ route('dashboard') }}">Dashboard</a>
 
-    <div class="text-center container-sm border border-primary p-5 rounded-pill">
-        <h1 class="text-danger mb-5">Laravel
-            <span class="text-primary">+ jQuery</span>
-            <span class="text-success">+ Bootstrap</span>
-        </h1>
-        </span>
-        <button id="btnKlik" class="btn btn-success">Klik disini !!!</button>
-        <button id="btnSeret" class="btn btn-primary">Seret disini !!!</button>
+                <!-- Tambahkan link navigasi -->
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('hospitals.index') }}">Hospitals</a>
+                    </li>
+                </ul>
+
+                <form action="{{ route('logout') }}" method="POST" class="ms-auto">
+                    @csrf
+                    <button class="btn btn-outline-danger btn-sm">Logout</button>
+                </form>
+            </div>
+        </nav>
+    </nav>
+    <div class="py-4">
+        @yield('content')
     </div>
-
 </body>
 
 </html>
