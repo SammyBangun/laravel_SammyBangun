@@ -17,7 +17,10 @@
                 <!-- Tambahkan link navigasi -->
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('hospitals.index') }}">Hospitals</a>
+                        <a class="nav-link" href="{{ route('hospitals.index') }}">Rumah Sakit</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('patients.index') }}">Pasien</a>
                     </li>
                 </ul>
 

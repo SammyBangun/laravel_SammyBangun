@@ -26,7 +26,8 @@
                         <td>
                             <a href="{{ route('hospitals.show', $hospital->id) }}" class="btn btn-info btn-sm">Detail</a>
                             <a href="{{ route('hospitals.edit', $hospital->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                            <button class="btn btn-danger btn-sm delete-btn" data-id="{{ $hospital->id }}">Hapus</button>
+                            <button class="btn btn-danger btn-sm delete-btn-hospital"
+                                data-id="{{ $hospital->id }}">Hapus</button>
                         </td>
                     </tr>
                 @endforeach
