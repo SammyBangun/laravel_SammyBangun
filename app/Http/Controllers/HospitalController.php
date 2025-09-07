@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Hospital;
 use Illuminate\Http\Request;
+use App\Http\Requests\HospitalRequest;
 
 class HospitalController extends Controller
 {
@@ -27,16 +28,9 @@ class HospitalController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(HospitalRequest $request)
     {
-        $request->validate([
-            'nama' => 'required|string',
-            'alamat' => 'required|string',
-            'email' => 'nullable|email',
-            'telepon' => 'nullable|string',
-        ]);
-
-        Hospital::create($request->all());
+        Hospital::create($request->validated());
         return redirect()->route('hospitals.index')->with('success', 'Data Rumah Sakit berhasil disimpan.');
     }
 
@@ -59,16 +53,9 @@ class HospitalController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Hospital $hospital)
+    public function update(HospitalRequest $request, Hospital $hospital)
     {
-        $request->validate([
-            'nama' => 'required|string',
-            'alamat' => 'required|string',
-            'email' => 'nullable|email',
-            'telepon' => 'nullable|string',
-        ]);
-
-        $hospital->update($request->all());
+        $hospital->update($request->validated());
         return redirect()->route('hospitals.index')->with('success', 'Data Rumah Sakit berhasil diupdate.');
     }
 

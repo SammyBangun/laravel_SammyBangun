@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Patient;
 use App\Models\Hospital;
 use Illuminate\Http\Request;
+use App\Http\Requests\PatientRequest;
 
 class PatientController extends Controller
 {
@@ -27,16 +28,9 @@ class PatientController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(PatientRequest $request)
     {
-        $request->validate([
-            'nama' => 'required|string',
-            'alamat' => 'required|string',
-            'no_telpon' => 'required|string',
-            'id_rumah_sakit' => 'required|exists:hospitals,id',
-        ]);
-
-        Patient::create($request->all());
+        Patient::create($request->validated());
         return redirect()->route('patients.index')->with('success', 'Data pasien berhasil disimpan.');
     }
 
@@ -46,16 +40,9 @@ class PatientController extends Controller
         return view('patients.edit', compact('patient', 'hospitals'));
     }
 
-    public function update(Request $request, Patient $patient)
+    public function update(PatientRequest $request, Patient $patient)
     {
-        $request->validate([
-            'nama' => 'required|string',
-            'alamat' => 'required|string',
-            'no_telpon' => 'nullable|string',
-            'id_rumah_sakit' => 'required|exists:hospitals,id',
-        ]);
-
-        $patient->update($request->all());
+        $patient->update($request->validated());
         return redirect()->route('patients.index')->with('success', 'Data pasien berhasil diupdate.');
     }
 

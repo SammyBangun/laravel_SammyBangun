@@ -9,28 +9,15 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container">
-                <a class="navbar-brand" href="{{ route('dashboard') }}">Dashboard</a>
+    @include('components.navbar')
 
-                <!-- Tambahkan link navigasi -->
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('hospitals.index') }}">Rumah Sakit</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('patients.index') }}">Pasien</a>
-                    </li>
-                </ul>
+    @if (request()->routeIs('dashboard'))
+        <div>
+            <h1 class="text-center mt-5">Selamat Datang, {{ Auth::user()->name }}</h1>
+            <h4 class="text-center">Pilih menu di atas untuk mengelola data pasien dan rumah sakit</h4>
+        </div>
+    @endif
 
-                <form action="{{ route('logout') }}" method="POST" class="ms-auto">
-                    @csrf
-                    <button class="btn btn-outline-danger btn-sm">Logout</button>
-                </form>
-            </div>
-        </nav>
-    </nav>
     <div class="py-4">
         @yield('content')
     </div>
